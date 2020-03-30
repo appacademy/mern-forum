@@ -4,11 +4,12 @@
   "description": "A basic forum app made with the MERN stack",
   "main": "app.js",
   "scripts": {
+    "frontend-install": "npm install --prefix frontend",
     "start": "node app.js",
     "server": "nodemon app.js",
     "server:debug": "nodemon --inspect app.js",
     "dev": "concurrently \"npm run server\" \"npm start --prefix frontend\"",
-    "frontend-install": "npm install --prefix frontend"
+    "dev:debug": "concurrently \"npm run server:debug\" \"npm start --prefix frontend\""
   },
   "repository": {
     "type": "git",
