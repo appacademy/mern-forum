@@ -6,7 +6,11 @@ const mongoose = require('mongoose');
 mongoose.set('useCreateIndex', true);
 const mongoURI = require('./config/keys.js').mongoURI
 
+// models
 const User = require('./models/User.js');
+
+// controllers
+const usersRouter = require('./controllers/api/users.js');
 
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => console.log('Connected to MongoDB successfully!'))
@@ -30,5 +34,7 @@ app.get('/test', (req, res) => {
         }
     });
 });
+
+app.use('/api/users', usersRouter);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
