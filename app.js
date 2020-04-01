@@ -30,13 +30,13 @@ app.get('/test', (req, res) => {
         password_digest: '123456',
         age: 28
     });
-    user.save((err) => {
-        if (err.name === 'MongoError' && err.code === 11000) {
-            res.json('Email is already taken');
-        } else {
-            res.json(user);
-        }
-    });
+    user.save()
+        .then(user => res.json(user))
+        .catch(err => {
+            if (err.name === 'MongoError' && err.code === 11000) {
+                res.json('Email is already taken');
+            }
+        })
 });
 
 app.use('/api/users', usersRouter);
