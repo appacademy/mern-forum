@@ -6,15 +6,19 @@ const mongoose = require('mongoose');
 mongoose.set('useCreateIndex', true);
 const mongoURI = require('./config/keys.js').mongoURI
 
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true})
+    .then(() => console.log('Connected to MongoDB successfully!'))
+    .catch(error => console.log(error));
+
 // models
 const User = require('./models/User.js');
 
 // controllers
 const usersRouter = require('./controllers/api/users.js');
 
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true})
-    .then(() => console.log('Connected to MongoDB successfully!'))
-    .catch(error => console.log(error));
+// middleware for all routes
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {
     res.json('HOME');
